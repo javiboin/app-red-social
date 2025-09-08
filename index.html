@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Social</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Red Social I'm Like a Bird</h1>
+    <h2>Ver Posteos</h2>
+    <button onclick="getData()">Ver Posteos</button>
+    <ul id="postList"></ul>
+
+    <h2>Postear</h2>
+    <form id="postForm" onsubmit="postData()">
+        <label for="postTitle">Título: </label>
+        <input type="text" id="postTitle" required>
+
+        <label for="postBody">Comentario: </label>
+        <textarea type="text" id="postBody"></textarea>
+
+        <button type="submit">Envíar</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
