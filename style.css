@@ -46,3 +46,21 @@ input, textarea {
     border-radius: 5px;
     border: none;
 }
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.postItem {
+    background-color: #e9b474;
+    border: solid 2px #7a4b11;
+    border-radius: 10px;
+    padding: 20px 20px 8px 20px;
+    margin-bottom: 15px;
+}
+
+.editForm {
+    display: none;
+    margin-top: 10px;
+}
