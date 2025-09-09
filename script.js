@@ -31,7 +31,7 @@ function renderData() {
                 <input id="editTitle-${post.id}" type="text" value="${post.title}" required>
 
                 <label for="editBody">Contenido: </label>
-                <textarea id="editBody-${post.id}" required></textarea>
+                <textarea id="editBody-${post.id}" required>${post.body}</textarea>
 
                 <button onclick="updatePost(${post.id})">Actualizar</button>
             </div>
@@ -79,3 +79,37 @@ function editPost(id) {
     const editForm = document.getElementById(`editForm-${id}`);
     editForm.style.display = (editForm.style.display == 'none') ? 'block' : 'none';
 }
+
+function updatePost(id) {
+    const editTitle = document.getElementById(`editTitle-${id}`).value;
+    const editBody = document.getElementById(`editBody-${id}`).value;
+
+    if (editTitle.trim() == '' || editBody.trim() == '') {
+        alert('Por favor, complete todos los campos.');
+        return;
+    };
+
+    fetch(`${urlBase}/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+        id: id,
+        title: editTitle,
+        body: editBody,
+        userId: 1,
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+    .then(res => res.json())
+    .then(data => {
+        const index = posts.findIndex(post => post.id === data.id);
+        if (index != -1) {
+            posts[index] = data;
+        } else {
+            alert('Hubo un error al actualizar la información del posteo');
+        }
+        renderData();
+    })
+    .catch(error => console.log('Error al actualizar datos en la API: ', error));
+} 
