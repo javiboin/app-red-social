@@ -42,8 +42,10 @@ function renderData() {
 }
 
 function postData() {
-    const postTitle = document.getElementById('postTitle').value;
-    const postBody = document.getElementById('postBody').value;
+    const postTitleInput = document.getElementById('postTitle');
+    const postBodyInput = document.getElementById('postBody');
+    const postTitle = postTitleInput.value;
+    const postBody = postBodyInput.value;
 
     // validación de campos vacíos
     if (postTitle.trim() == '' || postBody.trim() == '') {
@@ -67,6 +69,13 @@ function postData() {
     .then(data => {
         posts.push(data);
         renderData();
+        postTitleInput.value = '';
+        postBodyInput.value = '';
     })
     .catch(error => console.log('Error al enviar datos a la API: ', error));
+}
+
+function editPost(id) {
+    const editForm = document.getElementById(`editForm-${id}`);
+    editForm.style.display = (editForm.style.display == 'none') ? 'block' : 'none';
 }
