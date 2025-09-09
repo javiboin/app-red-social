@@ -16,7 +16,7 @@
     <ul id="postList"></ul>
 
     <h2>¿Qué estas pensando?</h2>
-    <form id="postForm" onsubmit="postData()">
+    <form id="postForm" onsubmit="event.preventDefault(); postData()">
         <label for="postTitle">Título: </label>
         <input type="text" id="postTitle" required>
 

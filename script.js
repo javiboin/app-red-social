@@ -40,3 +40,33 @@ function renderData() {
         postList.appendChild(listItem);
     });
 }
+
+function postData() {
+    const postTitle = document.getElementById('postTitle').value;
+    const postBody = document.getElementById('postBody').value;
+
+    // validación de campos vacíos
+    if (postTitle.trim() == '' || postBody.trim() == '') {
+        alert('Por favor, complete todos los campos.');
+        return;
+    };
+
+    // fetch POST
+    fetch(urlBase, {
+        method: 'POST',
+        body: JSON.stringify({
+        title: postTitle,
+        body: postBody,
+        userId: 1,
+        }),
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
+    .then((response) => response.json())
+    .then(data => {
+        posts.push(data);
+        renderData();
+    })
+    .catch(error => console.log('Error al enviar datos a la API: ', error));
+}
