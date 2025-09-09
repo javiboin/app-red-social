@@ -11,6 +11,8 @@ function getData() {
         .catch(error => console.log('Error al llamar a la API: ', error))
 }
 
+getData();
+
 function renderData() {
     const postList = document.getElementById('postList');
     postList.innerHTML = '';
@@ -67,7 +69,7 @@ function postData() {
     })
     .then((response) => response.json())
     .then(data => {
-        posts.push(data);
+        posts.unshift(data);
         renderData();
         postTitleInput.value = '';
         postBodyInput.value = '';
@@ -113,3 +115,18 @@ function updatePost(id) {
     })
     .catch(error => console.log('Error al actualizar datos en la API: ', error));
 } 
+
+function deletePost(id) {
+    fetch(`${urlBase}/${id}`, {
+        method: 'DELETE',
+    })
+    .then(res => {
+        if(res.ok) {
+            posts = posts.filter(post => post.id != id);
+            renderData();
+        } else {
+            alert('Hubo un error al eliminar el posteo');
+        }
+    })
+    .catch(error => console.log('Error al eliminar datos en la API: ', error));
+}
